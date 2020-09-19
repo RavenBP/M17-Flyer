@@ -7,8 +7,8 @@ public class Scroll : MonoBehaviour
     Material material;
     Vector2 offset;
 
-    public int xVelocity;
-    public int yVelocity;
+    public float xVelocity;
+    public float yVelocity;
 
     private void Awake()
     {
