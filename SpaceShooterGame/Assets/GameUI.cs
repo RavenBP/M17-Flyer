@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameUI : MonoBehaviour
+public class GameUI : MonoBehaviour // Ideally this could be merged with the other UI scripts so all of the functions exist inside of one script...
 {
     public GameObject panel;
 
@@ -34,5 +34,10 @@ public class GameUI : MonoBehaviour
     {
         Time.timeScale = 1;
         SceneManager.LoadScene("MainMenuScene");
+    }
+
+    public void IncreaseScore()
+    {
+        Score.scoreValue += 100;
     }
 }
