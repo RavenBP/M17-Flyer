@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameUI : MonoBehaviour // Ideally this could be merged with the other UI scripts so all of the functions exist inside of one script...
 {
-    public GameObject panel;
+    public GameObject basePanel;
+    public GameObject overlayPanel;
 
     private bool gamePaused;
 
@@ -15,13 +16,15 @@ public class GameUI : MonoBehaviour // Ideally this could be merged with the oth
         {
             Time.timeScale = 0;
             gamePaused = true;
-            panel.SetActive(true);
+            basePanel.SetActive(false);
+            overlayPanel.SetActive(true);
         }
         else if (gamePaused == true)
         {
             Time.timeScale = 1;
             gamePaused = false;
-            panel.SetActive(false);
+            overlayPanel.SetActive(false);
+            basePanel.SetActive(true);
         }
     }
 
