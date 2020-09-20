@@ -27,10 +27,7 @@ public class GameUI : MonoBehaviour
 
     public void GameOver()
     {
-        Time.timeScale = 0;
-        // Toggle visibility of text?
-        // Change to a different scene?
-        //GetComponent<Text>
+        SceneManager.LoadScene("GameOverScene");
     }
 
     public void ReturnToMainMenu()

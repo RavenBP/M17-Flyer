@@ -286,7 +286,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1865964275}
         m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
-        m_MethodName: ResumeGame
+        m_MethodName: GameOver
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -295,7 +295,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 1
 --- !u!114 &499018239
 MonoBehaviour:
   m_ObjectHideFlags: 0
