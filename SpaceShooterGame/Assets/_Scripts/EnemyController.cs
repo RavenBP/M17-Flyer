@@ -12,8 +12,11 @@ public class EnemyController : MonoBehaviour
     public Sprite sprite4;
     public Sprite sprite5;
 
+    public GameObject pickupGO;
+
     float verticalSpeed = 1.0f;
     int health = 5;
+    int pickupDropChance;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +43,10 @@ public class EnemyController : MonoBehaviour
                 enemySprite.sprite = sprite5;
                 break;
         }
+
+        // Assign random drop chance for enemy
+        pickupDropChance = Random.Range(1, 10);
+        Debug.Log("Pickup drop chance = " + pickupDropChance);
     }
 
     // Update is called once per frame
@@ -51,6 +58,12 @@ public class EnemyController : MonoBehaviour
         if (health <= 0)
         {
             Score.scoreValue += 75;
+
+            if (pickupDropChance >= 8)
+            {
+                Instantiate(pickupGO, new Vector3(Random.Range(-2.5f, 2.5f), 5.0f, 0.0f), Quaternion.Euler(new Vector3(0.0f, 0.0f, 0.0f)));
+            }
+
             Respawn();
         }
     }
@@ -74,6 +87,10 @@ public class EnemyController : MonoBehaviour
     {
         transform.position = new Vector3(Random.Range(-2.5f, 2.5f), 5.0f, 0.0f); // Set enemy's position in random area at top of screen
         health = 5;
+        
+        // Change pickup drop chance
+        pickupDropChance = Random.Range(1, 10);
+        Debug.Log("NEW Pickup drop chance = " + pickupDropChance);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -92,7 +109,7 @@ public class EnemyController : MonoBehaviour
         else if (collision.tag == "Bullet") // Enemy is hit by bullet
         {
             health--;
-            Debug.Log("Triggered by Bullet. Current Health = " + health);
+            //Debug.Log("Triggered by Bullet. Current Health = " + health);
         }
     }
 }
