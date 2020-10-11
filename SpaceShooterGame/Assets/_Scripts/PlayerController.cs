@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     private Vector2 initialTouchPos;
     private Vector2 currentTouchPos;
 
+    public BulletManager bulletManager;
+
     // Update is called once per frame
     void Update()
     {
@@ -30,7 +32,17 @@ public class PlayerController : MonoBehaviour
             touchStart = false;
         }
 
+        FireBullet();
     }
+
+    private void FireBullet()
+    {
+        if (Time.frameCount % 60 == 0)
+        {
+            bulletManager.GetBullet(transform.position);
+        }
+    }
+
     private void FixedUpdate()
     {
         if (touchStart)
