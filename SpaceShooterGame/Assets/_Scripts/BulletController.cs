@@ -34,4 +34,12 @@ public class BulletController : MonoBehaviour
             bulletManager.ReturnBullet(gameObject);
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Enemy")
+        {
+            bulletManager.ReturnBullet(gameObject);
+        }
+    }
 }

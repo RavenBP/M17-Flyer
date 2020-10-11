@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyController : MonoBehaviour
 {
@@ -11,7 +12,8 @@ public class EnemyController : MonoBehaviour
     public Sprite sprite4;
     public Sprite sprite5;
 
-    float verticalSpeed = 5.0f;
+    float verticalSpeed = 1.0f;
+    int health = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +47,12 @@ public class EnemyController : MonoBehaviour
     {
         Move();
         CheckPosition();
+
+        if (health <= 0)
+        {
+            Score.scoreValue += 75;
+            Respawn();
+        }
     }
 
     void Move()
@@ -56,9 +64,35 @@ public class EnemyController : MonoBehaviour
 
     void CheckPosition()
     {
-        if (transform.position.y <= -4.0f)
+        if (transform.position.y <= -4.0f) // If player reaches the bottom of the screen
         {
-            transform.position = new Vector3(Random.Range(-2.5f, 2.5f), 5.0f, 0.0f);
+            Respawn();
         }    
+    }
+
+    void Respawn()
+    {
+        transform.position = new Vector3(Random.Range(-2.5f, 2.5f), 5.0f, 0.0f); // Set enemy's position in random area at top of screen
+        health = 5;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            PlayerController.playerLives -= 1; // Decrement player lives
+
+            if (PlayerController.playerLives < 0) // Player has lost all lives
+            {
+                SceneManager.LoadScene("GameOverScene"); // Load GameOverScene
+            }
+
+            Debug.Log("Triggered by Player");
+        }
+        else if (collision.tag == "Bullet") // Enemy is hit by bullet
+        {
+            health--;
+            Debug.Log("Triggered by Bullet. Current Health = " + health);
+        }
     }
 }

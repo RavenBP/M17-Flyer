@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameOverBounds : MonoBehaviour
 {
-    BoxCollider2D boxCollider;
+    int health = 20;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +17,11 @@ public class GameOverBounds : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (health <= 0)
+        {
+            Debug.Log("Destroyed");
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -35,8 +39,8 @@ public class GameOverBounds : MonoBehaviour
         }
         else if (collision.tag == "Bullet")
         {
-            Score.scoreValue += 10;
-            Debug.Log("Triggered by Bullet");
+            health--;
+            Debug.Log("Triggered by Bullet. Current Health = " + health);
         }
     }
 }
