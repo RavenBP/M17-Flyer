@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     public float speed = 5.0f;
     private bool touchStart = false;
+    public static int playerLives = 3;
     private Vector2 initialTouchPos;
     private Vector2 currentTouchPos;
 
@@ -39,6 +40,16 @@ public class PlayerController : MonoBehaviour
             moveCharacter(direction);
         }
 
+    }
+
+    int GetPlayerLives()
+    {
+        return playerLives;
+    }
+
+    void SetPlayerLives(int lives)
+    {
+        playerLives = lives;
     }
 
     void moveCharacter(Vector2 direction)

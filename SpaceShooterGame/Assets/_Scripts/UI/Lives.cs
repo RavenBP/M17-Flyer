@@ -3,25 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System;
 
-public class Score : MonoBehaviour
+public class Lives : MonoBehaviour
 {
-    public static int scoreValue = 0;
-    Text scoreText;
+    Text livesText;
 
     private void Start()
     {
         if (SceneManager.GetActiveScene().name == "GameScene")
         {
-            scoreValue = 0;
+            //lives = 3;
+            Debug.Log("If in Lives has gone through");
         }
 
-        scoreText = GetComponent<Text>();
+        livesText = GetComponent<Text>();
+        Debug.Log("Text GetComponent has gone through");
     }
 
     private void Update()
     {
-        scoreText.text = "Score: " + scoreValue;
+        livesText.text = PlayerController.playerLives.ToString();
     }
 }
