@@ -24,7 +24,7 @@ public class BulletController : MonoBehaviour
 
     private void Move()
     {
-        transform.position += new Vector3(0.0f, verticalSpeed, 0.0f);
+        transform.position += new Vector3(0.0f, verticalSpeed, 0.0f) * Time.deltaTime;
     }
 
     private void CheckBounds()

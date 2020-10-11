@@ -12,16 +12,14 @@ public class Lives : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "GameScene")
         {
-            //lives = 3;
-            Debug.Log("If in Lives has gone through");
+            PlayerController.playerLives = 3; // Reset player lives
         }
 
         livesText = GetComponent<Text>();
-        Debug.Log("Text GetComponent has gone through");
     }
 
     private void Update()
     {
-        livesText.text = PlayerController.playerLives.ToString();
+        livesText.text = PlayerController.playerLives.ToString(); // Update text on screen 
     }
 }

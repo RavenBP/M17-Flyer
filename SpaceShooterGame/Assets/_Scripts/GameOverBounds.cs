@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -23,12 +24,18 @@ public class GameOverBounds : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            PlayerController.playerLives -= 1;
+            PlayerController.playerLives -= 1; // Decrement player lives
 
-            if (PlayerController.playerLives <= -1)
+            if (PlayerController.playerLives < 0) // Player has lost all lives
             {
-                SceneManager.LoadScene("GameOverScene");
+                SceneManager.LoadScene("GameOverScene"); // Load GameOverScene
             }
+
+            Debug.Log("Triggered by Player");
+        }
+        else if (collision.tag == "Bullet")
+        {
+            Debug.Log("Triggered by Bullet");
         }
     }
 }

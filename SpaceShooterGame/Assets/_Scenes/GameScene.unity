@@ -1408,7 +1408,7 @@ GameObject:
   - component: {fileID: 990982235}
   m_Layer: 0
   m_Name: BulletManager
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1426,7 +1426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 7540998390858365253, guid: 0ccfbed3d39661c46a554b88754ff240, type: 3}
-  maxBullets: 5
+  maxBullets: 10
 --- !u!4 &990982236
 Transform:
   m_ObjectHideFlags: 0
