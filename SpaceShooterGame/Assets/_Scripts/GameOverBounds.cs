@@ -35,6 +35,7 @@ public class GameOverBounds : MonoBehaviour
         }
         else if (collision.tag == "Bullet")
         {
+            Score.scoreValue += 10;
             Debug.Log("Triggered by Bullet");
         }
     }
