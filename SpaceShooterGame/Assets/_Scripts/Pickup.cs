@@ -69,7 +69,7 @@ public class Pickup : MonoBehaviour
             }
             else if (increaseScore == true)
             {
-                Score.scoreValue += 100;
+                Score.scoreValue += 75;
             }
 
             Destroy(gameObject);

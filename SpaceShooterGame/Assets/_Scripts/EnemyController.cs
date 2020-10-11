@@ -57,7 +57,7 @@ public class EnemyController : MonoBehaviour
 
         if (health <= 0)
         {
-            Score.scoreValue += 75;
+            Score.scoreValue += 10;
 
             if (pickupDropChance >= 8)
             {
