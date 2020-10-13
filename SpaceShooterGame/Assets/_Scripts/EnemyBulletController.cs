@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Scripting.APIUpdating;
 
 public class EnemyBulletController : MonoBehaviour
@@ -39,7 +40,13 @@ public class EnemyBulletController : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+            PlayerController.playerLives -= 1; // Decrement player lives
             bulletManager.ReturnBullet(gameObject);
+
+            if (PlayerController.playerLives < 0) // Player has lost all lives
+            {
+                SceneManager.LoadScene("GameOverScene"); // Load GameOverScene
+            }
         }
     }
 }
