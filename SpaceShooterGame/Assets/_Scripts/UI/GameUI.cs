@@ -11,7 +11,7 @@ public class GameUI : MonoBehaviour
 
     private bool creditsDisplayed;
     private bool controlsDisplayed;
-    private bool gamePaused;
+    public static bool gamePaused;
 
     ////////////////////////////////////// Used by MainMenuScene
     public void PlayGame() // Also used by GameOverScene

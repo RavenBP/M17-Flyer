@@ -66,11 +66,15 @@ public class Pickup : MonoBehaviour
             if (increaseLives == true)
             {
                 PlayerController.playerLives++;
+                SoundManager.PlaySound("spell2");
             }
             else if (increaseScore == true)
             {
                 Score.scoreValue += 75;
+                SoundManager.PlaySound("sfx_shieldUp");
             }
+
+
 
             Destroy(gameObject);
             Debug.Log("Picked up pickup");

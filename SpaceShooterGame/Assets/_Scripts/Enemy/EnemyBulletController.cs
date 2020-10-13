@@ -41,6 +41,7 @@ public class EnemyBulletController : MonoBehaviour
         if (collision.tag == "Player")
         {
             PlayerController.playerLives -= 1; // Decrement player lives
+            SoundManager.PlaySound("sfx_shieldDown");
             bulletManager.ReturnBullet(gameObject);
 
             if (PlayerController.playerLives < 0) // Player has lost all lives

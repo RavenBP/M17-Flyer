@@ -37,9 +37,10 @@ public class PlayerController : MonoBehaviour
 
     private void FireBullet()
     {
-        if (Time.frameCount % 60 == 0)
+        if (Time.frameCount % 60 == 0 && GameUI.gamePaused == false)
         {
             bulletManager.GetBullet(transform.position);
+            SoundManager.PlaySound("sfx_laser1");
         }
     }
 

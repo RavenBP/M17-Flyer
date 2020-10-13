@@ -60,6 +60,7 @@ public class EnemyController : MonoBehaviour
         if (health <= 0)
         {
             Score.scoreValue += 10;
+            SoundManager.PlaySound("sfx_lose");
 
             if (pickupDropChance >= 8)
             {
@@ -74,9 +75,10 @@ public class EnemyController : MonoBehaviour
 
     private void FireBullet()
     {
-        if (Time.frameCount % firingSpeed == 0)
+        if (Time.frameCount % firingSpeed == 0 && GameUI.gamePaused == false)
         {
             bulletManager.GetBullet(transform.position);
+            SoundManager.PlaySound("sfx_laser2");
         }
     }
 
