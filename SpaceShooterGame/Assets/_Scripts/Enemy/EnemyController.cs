@@ -16,7 +16,8 @@ public class EnemyController : MonoBehaviour
     public GameObject pickupGO;
     public EnemyBulletManager bulletManager;
 
-    float verticalSpeed = 1.0f;
+    float verticalSpeed = 0.9f;
+    float horizontalSpeed = 0.8f;
     int health = 5;
     int pickupDropChance;
     int firingSpeed;
@@ -47,12 +48,7 @@ public class EnemyController : MonoBehaviour
                 break;
         }
 
-        // Assign random drop chance for enemy
-        pickupDropChance = Random.Range(1, 10);
-        Debug.Log("Pickup drop chance = " + pickupDropChance);
-
-        // Assign random firing speed for enemy
-        firingSpeed = Random.Range(600, 1200);
+        Respawn();
     }
 
     // Update is called once per frame
@@ -87,13 +83,18 @@ public class EnemyController : MonoBehaviour
     void Move()
     {
         Vector3 newPosition;
-        newPosition = new Vector3(0.0f, -verticalSpeed, 0.0f) * Time.deltaTime;
+        newPosition = new Vector3(horizontalSpeed, -verticalSpeed, 0.0f) * Time.deltaTime;
         transform.Translate(newPosition);
     }
 
     void CheckPosition()
     {
-        if (transform.position.y <= -4.0f) // If player reaches the bottom of the screen
+        if (transform.position.x >= 2.6f || transform.position.x <= -2.6f) // If player reaches side of screen
+        {
+            horizontalSpeed *= -1;
+        }
+
+        if (transform.position.y <= -6.0f) // If player reaches the bottom of the screen
         {
             Respawn();
         }    
@@ -101,15 +102,30 @@ public class EnemyController : MonoBehaviour
 
     void Respawn()
     {
-        transform.position = new Vector3(Random.Range(-2.5f, 2.5f), 5.0f, 0.0f); // Set enemy's position in random area at top of screen
+        transform.position = new Vector3(Random.Range(-2.5f, 2.5f), 6.0f, 0.0f); // Set enemy's position in random area at top of screen
         health = 5;
-        
+
+        Randomize();
+    }
+
+    void Randomize() // Randomize enemy behaviour values
+    {
+        // Randomize vertical speed
+        verticalSpeed = Random.Range(0.8f, 1.5f);
+
         // Change pickup drop chance
         pickupDropChance = Random.Range(1, 10);
-        Debug.Log("NEW Pickup drop chance = " + pickupDropChance);
 
         // Change firing speed
-        firingSpeed = Random.Range(600, 1200);
+        firingSpeed = Random.Range(600, 1800);
+
+        // Randomize direction
+        int randomInt = Random.Range(0, 10);
+
+        if (randomInt > 5)
+        {
+            horizontalSpeed *= -1.0f;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
