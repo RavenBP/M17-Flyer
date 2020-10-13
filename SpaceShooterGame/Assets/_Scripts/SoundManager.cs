@@ -7,6 +7,7 @@ public class SoundManager : MonoBehaviour
     public static AudioClip fireSound;
     public static AudioClip enemyFireSound;
     public static AudioClip hitSound;
+    public static AudioClip enemyHitSound;
     public static AudioClip enemyDestroyedSound;
     public static AudioClip pickupSound;
     public static AudioClip extraLifeSound;
@@ -19,6 +20,7 @@ public class SoundManager : MonoBehaviour
         fireSound = Resources.Load<AudioClip>("sfx_laser1");
         enemyFireSound = Resources.Load<AudioClip>("sfx_laser2");
         hitSound = Resources.Load<AudioClip>("sfx_shieldDown");
+        enemyHitSound = Resources.Load<AudioClip>("impact");
         enemyDestroyedSound = Resources.Load<AudioClip>("sfx_lose");
         pickupSound = Resources.Load<AudioClip>("sfx_shieldUp");
         extraLifeSound = Resources.Load<AudioClip>("spell2");
@@ -38,6 +40,9 @@ public class SoundManager : MonoBehaviour
                 break;
             case "sfx_shieldDown":
                 audioSource.PlayOneShot(hitSound);
+                break;
+            case "impact":
+                audioSource.PlayOneShot(enemyHitSound);
                 break;
             case "sfx_lose":
                 audioSource.PlayOneShot(enemyDestroyedSound);

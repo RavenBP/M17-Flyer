@@ -47,6 +47,7 @@ public class BulletController : MonoBehaviour
     {
         if (collision.tag == "Enemy" && isGoingUp == true)
         {
+            SoundManager.PlaySound("impact");
             bulletManager.ReturnBullet(gameObject);
         }
         else if (collision.tag == "Player" && isGoingUp == false)
