@@ -5,6 +5,7 @@ using UnityEngine.Scripting.APIUpdating;
 
 public class BulletController : MonoBehaviour
 {
+    public bool isGoingUp = false;
     public float verticalSpeed;
     public float verticalBounds;
     public BulletManager bulletManager;
@@ -24,12 +25,19 @@ public class BulletController : MonoBehaviour
 
     private void Move()
     {
-        transform.position += new Vector3(0.0f, verticalSpeed, 0.0f) * Time.deltaTime;
+        if (isGoingUp == true) // Projectile is firing upwards
+        {
+            transform.position += new Vector3(0.0f, verticalSpeed, 0.0f) * Time.deltaTime;
+        }
+        else if (isGoingUp == false) // Projectile is firing downwards
+        {
+            transform.position += new Vector3(0.0f, -verticalSpeed, 0.0f) * Time.deltaTime;
+        }
     }
 
     private void CheckBounds()
     {
-        if (transform.position.y > verticalBounds)
+        if (transform.position.y > verticalBounds || transform.position.y < -verticalBounds)
         {
             bulletManager.ReturnBullet(gameObject);
         }
@@ -37,7 +45,11 @@ public class BulletController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Enemy")
+        if (collision.tag == "Enemy" && isGoingUp == true)
+        {
+            bulletManager.ReturnBullet(gameObject);
+        }
+        else if (collision.tag == "Player" && isGoingUp == false)
         {
             bulletManager.ReturnBullet(gameObject);
         }

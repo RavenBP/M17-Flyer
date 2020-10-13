@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,10 +14,12 @@ public class EnemyController : MonoBehaviour
     public Sprite sprite5;
 
     public GameObject pickupGO;
+    public EnemyBulletManager bulletManager;
 
     float verticalSpeed = 1.0f;
     int health = 5;
     int pickupDropChance;
+    int firingSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +50,9 @@ public class EnemyController : MonoBehaviour
         // Assign random drop chance for enemy
         pickupDropChance = Random.Range(1, 10);
         Debug.Log("Pickup drop chance = " + pickupDropChance);
+
+        // Assign random firing speed for enemy
+        firingSpeed = Random.Range(600, 1200);
     }
 
     // Update is called once per frame
@@ -65,6 +71,16 @@ public class EnemyController : MonoBehaviour
             }
 
             Respawn();
+        }
+
+        FireBullet();
+    }
+
+    private void FireBullet()
+    {
+        if (Time.frameCount % firingSpeed == 0)
+        {
+            bulletManager.GetBullet(transform.position);
         }
     }
 
@@ -91,6 +107,9 @@ public class EnemyController : MonoBehaviour
         // Change pickup drop chance
         pickupDropChance = Random.Range(1, 10);
         Debug.Log("NEW Pickup drop chance = " + pickupDropChance);
+
+        // Change firing speed
+        firingSpeed = Random.Range(600, 1200);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -106,7 +125,7 @@ public class EnemyController : MonoBehaviour
 
             Debug.Log("Triggered by Player");
         }
-        else if (collision.tag == "Bullet") // Enemy is hit by bullet
+        else if (collision.tag == "PlayerBullet") // Enemy is hit by bullet
         {
             health--;
             //Debug.Log("Triggered by Bullet. Current Health = " + health);
