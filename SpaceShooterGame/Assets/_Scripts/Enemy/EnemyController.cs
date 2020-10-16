@@ -119,7 +119,7 @@ public class EnemyController : MonoBehaviour
         pickupDropChance = Random.Range(1, 10);
 
         // Change firing speed
-        firingSpeed = Random.Range(600, 1800);
+        firingSpeed = Random.Range(60, 180); // Editor values - (600, 1800)
 
         // Randomize direction
         int randomInt = Random.Range(0, 10);
